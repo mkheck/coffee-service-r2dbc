@@ -27,7 +27,6 @@ import reactor.core.publisher.Mono;
 import javax.annotation.PostConstruct;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.UUID;
 
 @SpringBootApplication
 public class CoffeeServiceR2dbcApplication {
@@ -96,7 +95,7 @@ class Demo {
 
     @PostConstruct
     private void run() {
-        repo.deleteAllById().thenMany(
+        repo.deleteAll().thenMany(
                 Flux.just("Blue Bottle Coffee", "Philz Coffee")
                         .map(Coffee::new)
                         .flatMap(repo::save))
